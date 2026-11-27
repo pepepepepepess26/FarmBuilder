@@ -314,7 +314,111 @@ public final class Farms {
                         e}});
     }
 
-    private static final List<Blueprint> BUILTIN = List.of(meat(), potions(), smelter(), house());
+    // ---------- 5. Баня 9x9 (только ванильные блоки): предбанник + парилка с каменкой, дымоход через крышу ----------
+    private static Blueprint bathhouse() {
+        Map<Character, Entry> p = new HashMap<>();
+        p.put('S', item("Каменные кирпичи", Items.STONE_BRICKS));
+        p.put('P', tagged("Доски (любые)", "minecraft:planks", Items.SPRUCE_PLANKS, '\0'));
+        p.put('L', tagged("Брёвна (любые)", "minecraft:logs", Items.SPRUCE_LOG, '\0'));
+        p.put('G', item("Стеклянная панель", Items.GLASS_PANE));
+        p.put('B', tagged("Ступеньки (дерево)", "minecraft:wooden_stairs", Items.SPRUCE_STAIRS, '^'));
+        p.put('b', tagged("Ступеньки (дерево)", "minecraft:wooden_stairs", Items.SPRUCE_STAIRS, 'v'));
+        p.put('R', tagged("Плиты (дерево)", "minecraft:wooden_slabs", Items.SPRUCE_SLAB, '\0'));
+        p.put('W', tagged("Плиты (дерево)", "minecraft:wooden_slabs", Items.SPRUCE_SLAB, '\0'));
+        p.put('T', item("Фонарь", Items.LANTERN));
+        p.put('N', item("Бочка", Items.BARREL));
+        p.put('K', item("Котёл", Items.CAULDRON));
+        p.put('F', new Entry("Печь", s -> s.is(Items.FURNACE), Items.FURNACE, '\0', '>'));
+        p.put('Y', item("Костёр", Items.CAMPFIRE));
+        return new Blueprint("bathhouse", "Баня", "Баня",
+                "Небольшая баня 9x9, только ванильные блоки: предбанник с лавкой и бочкой, парилка с каменкой "
+                        + "(печь с горящим костром сверху - от него идёт дым, рядом котёл с водой), полками и фонарём, дымоход через крышу, окна. Дверь поставьте сами. "
+                        + "Для высоты бот строит леса из земли (положите 20+ блоков земли) и потом убирает их.",
+                Items.CAULDRON, 9, 9, p, new String[][]{
+                {"...SSS...",
+                        ".SSSSSSS.",
+                        ".SPPPPPS.",
+                        ".SPPPPPS.",
+                        ".SPPPPPS.",
+                        ".SPPPPPS.",
+                        ".SPPPPPS.",
+                        ".SSSSSSS.",
+                        "........."},
+                {".........",
+                        ".LPP.PPL.",
+                        ".PW...NP.",
+                        ".PW...KP.",
+                        ".PPP.PPP.",
+                        ".PWWWKFP.",
+                        ".PPPPPSP.",
+                        ".LPPPPPL.",
+                        "........."},
+                {".........",
+                        ".LGP.PGL.",
+                        ".P....TP.",
+                        ".G.....P.",
+                        ".PPP.PPP.",
+                        ".P....YG.",
+                        ".P.T..SP.",
+                        ".LPPPPPL.",
+                        "........."},
+                {".........",
+                        ".LPPPPPL.",
+                        ".P.....P.",
+                        ".P.....P.",
+                        ".PPPPPPP.",
+                        ".P.....P.",
+                        ".P....SP.",
+                        ".LPPPPPL.",
+                        "........."},
+                {"BBBBBBBBB",
+                        ".PPPPPPP.",
+                        ".P.....P.",
+                        ".P.....P.",
+                        ".P.....P.",
+                        ".P.....P.",
+                        ".P....SP.",
+                        ".PPPPPPP.",
+                        "bbbbbbbbb"},
+                {".........",
+                        "BBBBBBBBB",
+                        ".P.....P.",
+                        ".P.....P.",
+                        ".P.....P.",
+                        ".P.....P.",
+                        ".P....SP.",
+                        "bbbbbbbbb",
+                        "........."},
+                {".........",
+                        ".........",
+                        "BBBBBBBBB",
+                        ".P.....P.",
+                        ".P.....P.",
+                        ".P.....P.",
+                        "bbbbbbSbb",
+                        ".........",
+                        "........."},
+                {".........",
+                        ".........",
+                        ".........",
+                        "BBBBBBBBB",
+                        ".P.....P.",
+                        "bbbbbbbbb",
+                        "......S..",
+                        ".........",
+                        "........."},
+                {".........",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "RRRRRRRRR",
+                        ".........",
+                        "......S..",
+                        ".........",
+                        "........."}});
+    }
+
+    private static final List<Blueprint> BUILTIN = List.of(meat(), potions(), smelter(), house(), bathhouse());
     private static List<Blueprint> loaded = List.of();
 
     /** Встроенные фермы + чертежи из config/farmbuilder/*.json (статуи и т.п.). */
